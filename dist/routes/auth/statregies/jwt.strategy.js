@@ -13,15 +13,17 @@ exports.JwtStrategy = void 0;
 const passport_jwt_1 = require("passport-jwt");
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
 const users_1 = require("../../../domain/users");
 let JwtStrategy = class JwtStrategy extends passport_1.PassportStrategy(passport_jwt_1.Strategy, 'jwt') {
-    constructor(usersDao) {
+    constructor(usersDao, configService) {
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: 'MYSUPERSECRET',
+            secretOrKey: configService.get('JWT_SECRET'),
         });
         this.usersDao = usersDao;
+        this.configService = configService;
     }
     async validate(payload) {
         const user = await this.usersDao.findOneByEmail(payload.email);
@@ -33,7 +35,8 @@ let JwtStrategy = class JwtStrategy extends passport_1.PassportStrategy(passport
 };
 JwtStrategy = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [users_1.UsersDao])
+    __metadata("design:paramtypes", [users_1.UsersDao,
+        config_1.ConfigService])
 ], JwtStrategy);
 exports.JwtStrategy = JwtStrategy;
 //# sourceMappingURL=jwt.strategy.js.map

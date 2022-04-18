@@ -11,12 +11,14 @@ export class ProductsDao {
   ) {}
 
   findAll(authenticated = false): Promise<Products[]> {
-    return this.repo.find({ where: { visibleAuthenticated: authenticated } });
+    return this.repo.find({
+      where: { visiblePublic: true, visibleAuthenticated: authenticated },
+    });
   }
 
   findOne(id: number, authenticated = false): Promise<Products> {
     return this.repo.findOne({
-      where: { id, visibleAuthenticated: authenticated },
+      where: { id, visiblePublic: true, visibleAuthenticated: authenticated },
     });
   }
 }

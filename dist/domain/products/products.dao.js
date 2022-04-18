@@ -22,11 +22,13 @@ let ProductsDao = class ProductsDao {
         this.repo = repo;
     }
     findAll(authenticated = false) {
-        return this.repo.find({ where: { visibleAuthenticated: authenticated } });
+        return this.repo.find({
+            where: { visiblePublic: true, visibleAuthenticated: authenticated },
+        });
     }
     findOne(id, authenticated = false) {
         return this.repo.findOne({
-            where: { id, visibleAuthenticated: authenticated },
+            where: { id, visiblePublic: true, visibleAuthenticated: authenticated },
         });
     }
 };

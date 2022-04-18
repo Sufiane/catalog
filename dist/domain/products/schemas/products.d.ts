@@ -1,3 +1,4 @@
+import { CartedProducts } from '../../cartedProducts';
 import { Categories } from '../../categories';
 export declare class Products {
     id: number;
@@ -9,4 +10,5 @@ export declare class Products {
     visibleAuthenticated: boolean;
     categoryId: number;
     category: Categories;
+    carts?: CartedProducts[];
 }

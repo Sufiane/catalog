@@ -3,8 +3,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { CartedProducts } from '../../cartedProducts';
 
 import { Categories } from '../../categories';
 
@@ -37,4 +39,7 @@ export class Products {
   @ManyToOne(() => Categories, (category) => category.products)
   @JoinColumn({ name: 'category_id' })
   category: Categories;
+
+  @OneToMany(() => CartedProducts, (cartedProduct) => cartedProduct.product)
+  carts?: CartedProducts[];
 }

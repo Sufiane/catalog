@@ -1,4 +1,4 @@
-import { Param } from '@nestjs/common';
+import { Param, ParseIntPipe } from '@nestjs/common';
 import { Controller, Get } from '@nestjs/common';
 
 import { Public } from '../../decorators';
@@ -15,17 +15,6 @@ export class ProductsController {
    */
 
   @Public()
-  @Get('/:id')
-  findOnePublic(@Param() id: number): Promise<Products> {
-    return this.productsDao.findOne(id);
-  }
-
-  @Get('/:id/authenticated')
-  findOne(@Param() id: number): Promise<Products> {
-    return this.productsDao.findOne(id, true);
-  }
-
-  @Public()
   @Get()
   getAllPublic(): Promise<Products[]> {
     return this.productsDao.findAll();
@@ -34,5 +23,16 @@ export class ProductsController {
   @Get('/authenticated')
   getAll(): Promise<Products[]> {
     return this.productsDao.findAll(true);
+  }
+
+  @Public()
+  @Get('/:id')
+  findOnePublic(@Param('id', ParseIntPipe) id: number): Promise<Products> {
+    return this.productsDao.findOne(id);
+  }
+
+  @Get('/:id/authenticated')
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<Products> {
+    return this.productsDao.findOne(id, true);
   }
 }

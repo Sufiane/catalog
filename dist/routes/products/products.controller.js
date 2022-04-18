@@ -21,34 +21,19 @@ let ProductsController = class ProductsController {
     constructor(productsDao) {
         this.productsDao = productsDao;
     }
-    findOnePublic(id) {
-        return this.productsDao.findOne(id);
-    }
-    findOne(id) {
-        return this.productsDao.findOne(id, true);
-    }
     getAllPublic() {
         return this.productsDao.findAll();
     }
     getAll() {
         return this.productsDao.findAll(true);
     }
+    findOnePublic(id) {
+        return this.productsDao.findOne(id);
+    }
+    findOne(id) {
+        return this.productsDao.findOne(id, true);
+    }
 };
-__decorate([
-    decorators_1.Public(),
-    common_2.Get('/:id'),
-    __param(0, common_1.Param()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], ProductsController.prototype, "findOnePublic", null);
-__decorate([
-    common_2.Get('/:id/authenticated'),
-    __param(0, common_1.Param()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], ProductsController.prototype, "findOne", null);
 __decorate([
     decorators_1.Public(),
     common_2.Get(),
@@ -62,6 +47,21 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "getAll", null);
+__decorate([
+    decorators_1.Public(),
+    common_2.Get('/:id'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "findOnePublic", null);
+__decorate([
+    common_2.Get('/:id/authenticated'),
+    __param(0, common_1.Param('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "findOne", null);
 ProductsController = __decorate([
     common_2.Controller('products'),
     __metadata("design:paramtypes", [products_1.ProductsDao])
