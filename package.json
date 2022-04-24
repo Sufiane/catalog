@@ -16,8 +16,7 @@
     "lint": "eslint \"{src}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register jest --runInBand"
+    "test:cov": "jest --coverage"
   },
   "dependencies": {
     "@nestjs/common": "8.0.0",
@@ -65,6 +64,7 @@
     "typescript": "4.3.5"
   },
   "jest": {
+    "clearMocks": true,
     "moduleFileExtensions": [
       "js",
       "json",
