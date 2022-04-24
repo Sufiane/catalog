@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
-import { Categories } from '../categories';
-import { Products } from '../products';
 
 import { CartedProducts } from './schemas/cartedProducts';
 
